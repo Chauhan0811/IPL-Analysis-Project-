@@ -1,7 +1,4 @@
---- Title :-        IPL_Database Project
---- Created by :-   Vinit Sangoi
---- Date :-         19-07-2022
---- Tool used:-     PostgreSQL
+
 
 /*
 Description :- 
