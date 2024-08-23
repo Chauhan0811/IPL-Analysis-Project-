@@ -11,7 +11,7 @@ Description :-
 
 create table matches02(
 id int primary key,
-city varchar(50),
+city varchar(60),
 date date,
 player_of_match varchar(50),
 venue varchar(100),
