@@ -1,5 +1,3 @@
-
-
 /*
 Description :- 
 		• This is a IPL Database Project. This database contains 2 tables deliveries & matches.
@@ -125,9 +123,33 @@ select ball_result,count(*)from deliveries_v02 where ball_result In ('boundary',
  
  --- Q13) Write a query to fetch the total number of boundaries scored by each team
  --- Method 1
+ 
  select batting_team,count(ball_result) as total_boundary from deliveries_v02 
  where ball_result ='boundary' group by batting_team order by total_boundary desc
+ 
+ ---Method2
+ Select * from (select batting_team,
+				CASE WHEN total_run >= 4 THEN 'boundary'
+				     WHEN total_run = 0 THEN 'dot'
+				     ELSE 'others'
+				END as ball_result,
+				count(*) as total_boundary from deliveries group by batting_team,ball_result
+			   order by total_boundary desc) as temp 
+where ball_result = 'boundary';	
 
+--- Q14) Write a query to fetch the total number of dot balls bowled by each team
+---Method 1
+Select batting_team,count(ball_result) as dot_ball from deliveries_v02 
+where ball_result = 'dot' group  by batting_team order by dot_ball desc;
+                                              
+---Method2
+Select * from(select batting_team,Case when total_run >= 4 then 'boundary'
+			                           when total_run = 0 then 'dot'
+			                           else 'other'
+			                           end as ball_result,
+			                           count(*) as total_dots
+			      from deliveries group by batting_team,ball_result order by total_dots desc
+)as temp where ball_result = 'dot';
 
 
 
